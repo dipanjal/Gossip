@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Change Profile Picture";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<h2>Change Profile Picture</h2>
+@*<form action="post" class="form">
+    <input type="file" name="profile_picture" id="profile_picture" class="form-group" />
+    <input type="submit" class="btn btn-success" value="Save"/>
+</form>*@
+
+@using (Html.BeginForm("ChangeProfilePicture", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="file" name="File" id="profile_picture" class="form-group" />
+            <input type="submit" class="btn btn-success" value="Save" />
+        </div>
+    </div>
+}
+

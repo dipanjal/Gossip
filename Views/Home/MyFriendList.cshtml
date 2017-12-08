@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Project_Gossip.User>
+
+@{
+    ViewBag.Title = "MyFriendList";
+}
+
+<h2>MyFriendList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    string loggedUser = Session["user"].ToString();
+    if (item.Username != loggedUser)
+    {
+        <tr>
+            <td>
+                <a href="/Home/ViewUserProfile/@item.Username">@item.Name</a>
+            </td>
+            <td class="col-lg-3">
+                @Html.ActionLink("Message", "SendMessage", new { id = item.Username },new { @class="btn btn-success"}) |
+                @Html.ActionLink("Unfriend", "DeleteFriendRequest", new { id = item.Username }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+}
+
+</table>

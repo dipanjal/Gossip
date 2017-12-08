@@ -1,0 +1,48 @@
+﻿@using Project_Gossip
+@model IEnumerable<Project_Gossip.FriendList>
+
+@{
+    ViewBag.Title = "FriendRequestSendByUser";
+}
+
+
+
+<h2>FriendRequestSendByUser</h2>
+
+<p >
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Requested To")
+        </th>
+        <th>
+            @Html.Label("Requested From")
+        </th>
+        <th>
+            @Html.Label("Status")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FriendsUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FriendshipStatus.Name)
+        </td>
+        <td class="col-lg-3">
+            @Html.ActionLink("Cancel Request", "CancelFriendRequest", new { id=item.Username },new { @class="btn btn-danger"})
+
+        </td>
+    </tr>
+}
+
+</table>

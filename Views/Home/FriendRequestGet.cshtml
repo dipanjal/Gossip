@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Project_Gossip.User>
+
+@{
+    ViewBag.Title = "FriendRequestGet";
+}
+
+<h2>FriendRequestGet</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "ViewUserProfile", new { id = item.Username })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td class="col-lg-3">
+            @Html.ActionLink("Accept", "AcceptFriendRequest", new { id = item.Username }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Reject", "DeleteFriendRequest", new { id = item.Username }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

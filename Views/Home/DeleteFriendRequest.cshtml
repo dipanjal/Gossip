@@ -1,0 +1,61 @@
+﻿@model Project_Gossip.User
+
+@{
+    //var routeValues = HttpContext.Current.Request.RequestContext.RouteData.Values;
+
+    //string actionName = routeValues.ContainsKey("action").ToString();
+    //string controllerName = routeValues.ContainsKey("controller").ToString();
+
+    ViewBag.Title = "DeleteFriendRequest";
+
+}
+
+<h2>DeleteFriendRequest</h2>
+
+<h3>Are you sure you want to Unfriend @Model.Name From Your Account?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateofBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateofBirth)
+        </dd>
+
+    </dl>
+    <form method="post">
+        <div class="form-actions no-color">
+            <input type="hidden" name="id" value="@Model.Username" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </form>
+
+
+</div>

@@ -1,0 +1,55 @@
+﻿@model Project_Gossip.User
+
+@{
+    ViewBag.Title = "CancelFriendRequest";
+}
+
+<h2>CancelFriendRequest</h2>
+
+<h3>Are you sure you want to Cancel Friend Request To @Model.Name </h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateofBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateofBirth)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <div class="form-actions no-color">
+            <input type="hidden" name="id" value="@Model.Username"/>
+            <input type="submit" value="Cancel Request" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Test Autocomplete";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <script src="~/scripts/jquery.js"></script>
+    <script src="~/scripts/jquery-ui.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+        .body-back {
+            background: #76b852; /* fallback for old browsers */
+            #background-image: url('/Content/assets/img/bg.jpg');
+            #background-image: url('../Assets/image/index.jpg');
+            #background-image: url('../Assets/image/225157-free-nature-background-hd-1920x1200.jpg');
+            background-size:cover;
+            background-position:top;
+            background-repeat:no-repeat;
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            }
+        .form-box {
+            background:#000000;
+            padding-left:500px;
+            padding-right:500px;
+        }
+    </style>
+
+</head>
+<body style="padding-top:100px;">
+    <form method="post">
+        <div class="form-box">
+            <input id="search" placeholder="" class="form-control" />
+            <input type="submit" value="search" class="btn btn-default"/>
+        </div>
+    </form>
+
+    <script>
+        $(function () {
+            $("#search").attr("placeholder", "Hay There...");
+            $("#search").mouseenter(function () {
+                $("#search").attr("placeholder", "Type To Search...");
+            });
+
+            $("#search").mouseleave(function () {
+                $("#search").attr("placeholder","Search Here...");
+            });
+
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $("#search").autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
+</body>
+
+
+
+</html>

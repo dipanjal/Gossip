@@ -1,0 +1,155 @@
+﻿@model Project_Gossip.User
+
+@{
+    ViewBag.Title = "Welcome To Gossip";
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+    //ViewBag.LoadBundle = true;
+}
+
+@{
+    string day = DateTime.Now.Date.ToString("dd");
+    string month = DateTime.Now.Month.ToString();
+    int year_temp = Convert.ToInt32(DateTime.Now.Year)-14;
+    string year = year_temp.ToString();
+ }
+
+<body>
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+
+
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+
+    <script src="~/scripts/signup-validator.js"></script>
+
+    <div class="login-page">
+            <div class="form">
+                <form class="register-form" method="post" action="/Login/Signup" id="signup_form">
+                    <input type="text" name="email" id="email" placeholder="Email" required/>
+                    <p class="error-label" id="label_email"></p>
+                    <p class="form-label" id="username" hidden></p>
+                    <input type="text" name="name" id="fullname" placeholder="Full Name" required/>
+                    <p class="error-label" id="label_fullname"></p>
+                    <input type="password" name="password" id="password" placeholder="password" required/>
+                    <p class="error-label" id="label_password"></p>
+                    <p>Select Date Of Birth:</p>
+                    <div class="form-group">
+                        <select class="form-control" id="dobday" name="dobday"></select>
+                        <select class="form-control" id="dobmonth" name="dobmonth"></select>
+                        <select class="form-control" id="dobyear" name="dobyear"></select>
+                    </div>
+                    <button>sign up</button>
+                    <div class="form-control btn">
+                        <a href="/Login/Facebook" class="fa fa-facebook btn btn-primary btn-block" role="button">&nbsp; Login With Facebook</a>
+                    </div>
+                    <hr />
+                    <p id="swipeform">Already registered? <a href="#">Sign In</a></p>
+                </form>
+
+                <form class="login-form" method="post" action="/Login/">
+                    <input type="text" name="username" id="uname" placeholder="username" required/>
+                    <p class="error-label" id="label_uname"></p>
+                    <input type="password" name="password" id="upassword" placeholder="password" required/>
+                    <p class="error-label" id="label_upassword"></p>
+                    <button>login</button>
+                    <hr />
+                    <p id="swipeform">Not registered? <a href="#">Create an account</a></p>
+                </form>
+
+
+                @{
+                    if (ViewBag.msg != null)
+                    {
+                        <div class="msg_box msg_box-danger">
+                            <strong>Error!</strong> @ViewBag.msg
+                        </div>
+                    }
+                    if (ViewBag.success != null)
+                    {
+                        <div class="msg_box msg_box-success">
+                            <strong>Success!</strong> @ViewBag.success
+                        </div>
+                    }
+                    if (TempData["msg"] != null) //SHOWING MSG AFTER REDIRECTING FROM HOME CONTROLLER
+                    {
+                        string msg = TempData["msg"].ToString();
+                        <div class="msg_box msg_box-danger">
+                            <strong>Sorry!</strong> @msg <!--YOU MUST LOGIN FIRST-->
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+    </div>
+
+    <script>
+        $('#swipeform a').click(function () {
+            $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+        });
+
+        //autofill username with email
+         $(function(){
+             $("#email").keyup(function () {
+                 var email = $("#email").val();
+                 if (email.indexOf("@@") == -1 && email != "") {
+                     $("#username").show();
+                     $("#username").html("Your username: <font color='red'>" + email + "</font>");
+                 }
+                 else if(email=="") {
+                     $("#username").hide();
+                     $("#username").html(email);
+                 }
+             });
+
+             $("#email").focusout(splitUsernameFromEmail);
+
+             //$("input").click(splitUsernameFromEmail) //For username onclick
+             //$("#email").change(splitUsernameFromEmail); //For username value changed
+             //$("input").keyup(splitUsernameFromEmail); //For Handle Tab press on username field
+
+             //split email with @@ ans set firstpart of email as username
+             function splitUsernameFromEmail() {
+                 var email = $("#email").val();
+                 if (email != "") {
+                     var pattarn = "^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)?@@[a-zA-Z0-9]{2,50}([.][a-z]{2,5})+$";
+                     if (email.match(pattarn)) //if the email is validate
+                     {
+                         var arr = email.split("@@");
+                         if (arr.length > 1) {
+                             $("#username").show();
+                             $("#username").html("Your username: <font color='red'>" + arr[0] + "</font>");
+                         }
+                     }
+                     else {
+                         $("#username").hide();
+                         $("#username").html(email);
+                     }
+                 }
+                 else {
+                     $("#username").hide();
+                     $("#username").html(email);
+                 }
+             }
+         });
+
+        //jQuery DOB Picker
+         $(document).ready(function () {
+             var day_final = @day // this will ommit replacing leading zero
+             $.dobPicker({
+                 daySelector: '#dobday', /* Required */
+                 monthSelector: '#dobmonth', /* Required */
+                 yearSelector: '#dobyear', /* Required */
+                 dayDefault: day_final, /* Optional */
+                 monthDefault: '@month', /* Optional */
+                 yearDefault: '@year', /* Optional */
+                 minimumAge: 15, /* Optional */
+                 maximumAge: 60 /* Optional */
+             });
+         });
+    </script>
+
+</body>

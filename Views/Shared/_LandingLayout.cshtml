@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+
+    @*<link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png" />*@
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+
+    <script src="~/scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/scripts/jquery-ui.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/jquery.validate.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/scripts/dobPicker.js"></script>
+
+    <title>@ViewBag.Title</title>
+
+</head>
+
+<body class="body-back">
+    <nav class="navbar navbar-fixed-top">
+            <p class="msg_box msg_box-danger">Welcome To Gossip</p>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="navbar navbar-fixed-bottom footer">
+        <div class="msg_box">
+            <span class="text-muted ">&copy; @DateTime.Now.Year - Gossip</span>
+        </div>
+    </footer>
+
+</body>
+</html>
